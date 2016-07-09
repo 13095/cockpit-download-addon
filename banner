@@ -11,4 +11,5 @@
 // @exclude      http://www.pixiv.net/novel/*
 // @exclude      http://www.pixiv.net/member_illust.php?mode*
 // @grant        GM_xmlhttpRequest
+// @connect      pixiv.net
 // ==/UserScript==
