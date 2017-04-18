@@ -1,7 +1,7 @@
 {
   "name": "cockpit-download-addon",
   "description": "cockpit download helper addon.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "8th713",
   "bugs": {
     "url": "https://github.com/8th713/cockpit-download-addon/issues"

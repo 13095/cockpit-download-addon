@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         cockpit download addon
-// @version      1.0.1
+// @version      1.0.2
 // @description  cockpit download helper addon.
 // @author       8th713
 // @homepage     https://github.com/8th713/cockpit-download-addon
@@ -8,8 +8,11 @@
 // @license      MIT
 // @namespace    http://github.com/8th713
 // @match        http://www.pixiv.net/*
+// @match        https://www.pixiv.net/*
 // @exclude      http://www.pixiv.net/novel/*
+// @exclude      https://www.pixiv.net/novel/*
 // @exclude      http://www.pixiv.net/member_illust.php?mode*
+// @exclude      https://www.pixiv.net/member_illust.php?mode*
 // @grant        GM_xmlhttpRequest
 // @connect      pixiv.net
 // ==/UserScript==
