@@ -30,6 +30,6 @@ npm start
 * [@8th713](https://github.com/8th713)
 
 ## License
-Copyright 2016 8th713.
+Copyright 2016-2017 8th713.
 
 Licensed under the MIT License
