@@ -23,10 +23,12 @@ export function fromSingle(src: Source) {
 
 export async function fromMultiple(src: Source) {
   const zip = new unsafeWindow.JSZip()
+  let i = 0
 
   for (const image of src.images) {
     const ext = FileName.getExt(image.src)
-    const name = `${image.alt}.${ext}`
+    // const name = `${image.alt}.${ext}`
+    const name = String(++i).padStart(3, '000') + `.${ext}`
     const blob = await fetch(image.src, 'blob')
 
     zip.file(name, blob)
