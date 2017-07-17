@@ -23,3 +23,5 @@ type Details = {
 }
 
 declare var GM_xmlhttpRequest: (details: Details) => void
+
+declare var unsafeWindow: Window

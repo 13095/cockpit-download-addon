@@ -1,6 +1,5 @@
 // @flow
-/* global GM_xmlhttpRequest */
-import JSZip from 'jszip'
+/* global unsafeWindow, GM_xmlhttpRequest */
 import * as FileName from './fileName'
 
 function fetch(url: string, responseType: string) {
@@ -23,7 +22,8 @@ export function fromSingle(src: Source) {
 }
 
 export async function fromMultiple(src: Source) {
-  const zip = new JSZip()
+  const zip = new unsafeWindow.JSZip()
+  let i = 0
 
   for (const image of src.images) {
     const ext = FileName.getExt(image.src)
@@ -32,6 +32,5 @@ export async function fromMultiple(src: Source) {
 
     zip.file(name, blob)
   }
-
   return zip.generateAsync({type: 'blob'})
 }
