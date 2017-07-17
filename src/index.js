@@ -5,7 +5,7 @@ import * as DOM from './dom'
 
 const script = document.createElement('script')
 
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.js'
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js'
 DOM.append(script)
 
 const action = 'cockpit-download-addon'
