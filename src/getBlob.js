@@ -23,7 +23,6 @@ export function fromSingle(src: Source) {
 
 export async function fromMultiple(src: Source) {
   const zip = new unsafeWindow.JSZip()
-  let i = 0
 
   for (const image of src.images) {
     const ext = FileName.getExt(image.src)
