@@ -1,3 +1,16 @@
 {
-  "presets": ["es2015"]
+  "presets": [
+    ["env", {
+      "targets": {
+        "chrome": 58
+      },
+      "loose": true
+    }],
+    "flow"
+  ],
+  "plugins": [
+    ["transform-object-rest-spread", {
+      "useBuiltIns": true
+    }]
+  ]
 }

@@ -2,7 +2,7 @@
 cockpit download helper addon.
 
 ## Features and Usage
-visit [pages](http://8th713.github.io/cockpit-for-pixiv/).
+visit [pages](https://8th713.github.io/cockpit-for-pixiv/).
 
 ## Develop
 ```sh
@@ -30,6 +30,6 @@ npm start
 * [@8th713](https://github.com/8th713)
 
 ## License
-Copyright 2016 8th713.
+Copyright 2016-2017 8th713.
 
 Licensed under the MIT License

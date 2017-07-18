@@ -1,39 +1,73 @@
 const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
+const BabiliPlugin = require('babili-webpack-plugin')
 const template = require('lodash/template')
 const pkg = require('./package.json')
 
-const ENV = process.env.NODE_ENV || 'development'
-const banner = template(fs.readFileSync('banner', 'utf-8'))(pkg)
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
-module.exports = {
-  entry: './src/index.js',
+const config = {
+  entry: [
+    './src/index.js',
+  ],
   output: {
-    path: path.join(__dirname),
+    path: path.join(__dirname, '/'),
     filename: 'cockpit-download-addon.user.js',
-    publicPath: '/'
+    publicPath: '/',
   },
-  plugins: ([
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(ENV) })
-  ]).concat(ENV === 'production' ? [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { screw_ie8: true, warnings: false }
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     }),
-    new webpack.BannerPlugin(banner, { raw: true })
-  ] : []),
+  ],
   module: {
-    loaders: [
+    strictExportPresence: true,
+    rules: [
+      { parser: { requireEnsure: false } },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel?cacheDirectory'
-      }
-    ]
+        enforce: 'pre',
+        include: /src/,
+        use: [
+          {
+            options: {
+              baseConfig: { extends: ['react-app'] },
+              ignore: false,
+              useEslintrc: false,
+            },
+            loader: 'eslint-loader',
+          },
+        ],
+      },
+      {
+        test: /\.js$/,
+        include: /src/,
+        loader: 'babel-loader',
+        options: { cacheDirectory: true }
+      },
+    ],
   },
-  stats: { colors: true },
-  devtool: ENV !== 'production' && 'inline-source-map'
+  stats: {colors: true},
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
+  devtool: 'inline-source-map',
 }
+
+if (NODE_ENV === 'production') {
+  const banner = template(fs.readFileSync('./src/banner', 'utf-8'))(pkg)
+
+  config.plugins = [
+    ...config.plugins,
+    new BabiliPlugin(),
+    new webpack.BannerPlugin({banner, raw: true}),
+  ]
+  // $FlowFixMe
+  config.devtool = false
+}
+
+module.exports = config
